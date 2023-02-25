@@ -1,5 +1,4 @@
-using API.Data;
-using Microsoft.EntityFrameworkCore;
+using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,17 +6,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<DataContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+builder.Services.AddApplicationServices(builder.Configuration);
 
-builder.Services.AddCors(options => options.AddPolicy
-("social", builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")));
+builder.Services.AddAIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 
 app.UseCors("social");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
