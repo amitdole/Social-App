@@ -1,20 +1,21 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Social</a>
+      <a class="navbar-brand" routerLink="/" routerLinkActive="active">Social</a>
         <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Friends</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Messages</a>
-          </li>
+          <ng-container *ngIf="(accountService.currentUser$ | async)">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" routerLink="/members" routerLinkActive="active">Friends</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/lists" routerLinkActive="active">List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
+            </li>
+          </ng-container>
         </ul>
-
-        <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
-            <a class="dropdown-toggle text-light text-declaration-none" dropdownToggle>Welcome user</a>
+        <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as userdata" dropdown>
+            <a class="dropdown-toggle text-light text-declaration-none" dropdownToggle>Welcome {{userdata.userName | titlecase}}</a>
 
             <div class="dropdown-menu mt-3" *dropdownMenu>
                 <a class="dropdown-item">Edit Profile</a>
