@@ -19,14 +19,14 @@ namespace API.Data.Migrations
                 oldType: "TEXT",
                 oldNullable: true);
 
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "Users",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "INTEGER")
-                .Annotation("SqlServer:Identity", "1, 1");
+            //migrationBuilder.AlterColumn<int>(
+            //    name: "Id",
+            //    table: "Users",
+            //    type: "int",
+            //    nullable: false,
+            //    oldClrType: typeof(int),
+            //    oldType: "INTEGER")
+            //    .Annotation("SqlServer:Identity", "1, 1");
 
             migrationBuilder.AddColumn<byte[]>(
                 name: "PasswordHash",
@@ -61,14 +61,14 @@ namespace API.Data.Migrations
                 oldType: "nvarchar(max)",
                 oldNullable: true);
 
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "Users",
-                type: "INTEGER",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int")
-                .OldAnnotation("SqlServer:Identity", "1, 1");
+            //migrationBuilder.AlterColumn<int>(
+            //    name: "Id",
+            //    table: "Users",
+            //    type: "INTEGER",
+            //    nullable: false,
+            //    oldClrType: typeof(int),
+            //    oldType: "int")
+            //    .OldAnnotation("SqlServer:Identity", "1, 1");
         }
     }
 }

@@ -1,36 +1,43 @@
-﻿using API.Data;
+﻿using API.DTOs;
 using API.Entities;
+using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
     [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly DataContext _context;
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UsersController(DataContext context)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
-            _context = context;
+            _userRepository = userRepository;
+            _mapper = mapper;
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<FriendDto>>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
+            var friends = await _userRepository.GetFriendsAsync();
 
-            return Ok(users);
+            //var usersDTo = _mapper.Map<IEnumerable<FriendDto>>(users);
+
+            return Ok(friends);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUser(int id) 
+        [HttpGet("{userName}")]
+        public async Task<ActionResult<FriendDto>> GetUser(string userName)
         {
-            var user = await _context.Users.FindAsync(id);
+            var friend = await _userRepository.GetFriendByUserNameAsync(userName);
 
-            return Ok(user);
+            //var userDTo = _mapper.Map<FriendDto>(user);
+
+            return Ok(friend);
         }
     }
 }
