@@ -72,3 +72,5 @@ C:\Users\Amit\Documents\GitHub\Social App\API\bin\Debug\net7.0\Microsoft.AspNetC
 C:\Users\Amit\Documents\GitHub\Social App\API\bin\Debug\net7.0\Data\UserSeedData.json
 C:\Users\Amit\Documents\GitHub\Social App\API\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\Amit\Documents\GitHub\Social App\API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Amit\Documents\GitHub\Social App\api\bin\Debug\net7.0\CloudinaryDotNet.dll
+C:\Users\Amit\Documents\GitHub\Social App\api\bin\Debug\net7.0\Newtonsoft.Json.dll
