@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CA8C9AoXe4wbQK/TaaFWE2+coONlA1ajYJgONqSLZD4ziQvcZzfA2zfL1eFddr8SYXALdBJ+QE8yJEcazPY2Fg==",
+  "dgSpecHash": "QL3fvsYJXC4z0+XWqAEzkzLsxV8LnQW4SQxQyzXWuuelk8jjjQM9Zr+29ZVZTdN9s5yAfZhRoo2Kj5RvH/sz6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\api\\API.csproj",
+  "projectFilePath": "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Amit\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Amit\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

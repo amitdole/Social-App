@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\api\\API.csproj": {}
+    "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\api\\API.csproj": {
+    "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\api\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\api\\API.csproj",
+        "projectPath": "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Amit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\api\\obj\\",
+        "outputPath": "C:\\Users\\Amit\\Documents\\GitHub\\Social App\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Amit\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -96,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
