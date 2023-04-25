@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Friend } from '../_models/friend';
 import {map, of} from 'rxjs';
+import { PaginatedResult } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -12,21 +13,42 @@ export class FriendsService {
   baseUrl = environment.apiUrl
 
   friends: Friend[] = [];
+  paginatedResult: PaginatedResult<Friend[]> = new PaginatedResult<Friend[]>;
 
   constructor(private http:HttpClient) { }
 
-  getFriends(){
-    if (this.friends.length > 0){
-      return of(this.friends);
+  getFriends(page?: number, itemsPerPage?: number){
+
+    let params = new HttpParams();
+
+    if (page && itemsPerPage){
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
     }
+    // if (this.friends.length > 0){
+    //   return of(this.friends);
+    // }
     // return this.http.get<Friend[]>(this.baseUrl + 'users', this.getHttpOptions())
-    return this.http.get<Friend[]>(this.baseUrl + 'users').pipe(
-      map((friends: Friend[]) => {
-        this.friends = friends;
-        return friends;
+    return this.http.get<Friend[]>(this.baseUrl + 'users', {observe: "response", params}).pipe(
+      // map((friends: Friend[]) => {
+      //   this.friends = friends;
+      //   return friends;
+      // })
+
+      map(response => {
+        if (response.body){
+          this.paginatedResult.result = response.body;
+        }
+        const pagination = response.headers.get('Pagination');
+
+        if (pagination){
+          this.paginatedResult.pagination = JSON.parse(pagination);
+        }
+
+        return this.paginatedResult;
       })
     )
-  }
+    }
 
   getFriend(userName: string){
     const friend = this.friends.find(x=> x.userName = userName);

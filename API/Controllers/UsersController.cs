@@ -1,6 +1,7 @@
 ﻿using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -23,11 +24,21 @@ namespace API.Controllers
 
         //[AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FriendDto>>> GetUsers()
+        public async Task<ActionResult<PagedList<FriendDto>>> GetUsers([FromQuery] UserParams userparams)
         {
-            var friends = await _userRepository.GetFriendsAsync();
+            var currentUser = await _userRepository.GetUserByUserNameAsync(User.GetUserName());
+            userparams.CurrentUsername = currentUser.UserName;
+
+            if (string.IsNullOrEmpty(userparams.Gender) )
+            {
+                userparams.Gender = currentUser.Gender == "male" ? "female": "male";
+            }
+
+            var friends = await _userRepository.GetFriendsAsync(userparams);
 
             //var usersDTo = _mapper.Map<IEnumerable<FriendDto>>(users);
+
+            Response.AddPaginationHeader(new PaginationHeader(friends.CurrentPage, friends.PageSize, friends.TotalCount, friends.TotalPages));
 
             return Ok(friends);
         }
