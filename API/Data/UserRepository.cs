@@ -38,13 +38,19 @@ namespace API.Data
             var query = _context.Users.AsQueryable();
 
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
-            query = query.Where(u => u.Gender != userParams.Gender);
+            query = query.Where(u => u.Gender == userParams.Gender);
            
 
             var minDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MaxAge - 1));
             var maxDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MinAge));
 
             query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(x => x.Created),
+                _ => query.OrderByDescending(x => x.LastActive),
+            };
 
             return await PagedList<FriendDto>.CreateAsync(
                 query.AsNoTracking().ProjectTo<FriendDto>(_mapper.ConfigurationProvider),

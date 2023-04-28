@@ -31,7 +31,7 @@ namespace API.Controllers
 
             if (string.IsNullOrEmpty(userparams.Gender) )
             {
-                userparams.Gender = currentUser.Gender == "male" ? "female": "male";
+                userparams.Gender = currentUser.Gender == "male" ? "male" : "female";
             }
 
             var friends = await _userRepository.GetFriendsAsync(userparams);

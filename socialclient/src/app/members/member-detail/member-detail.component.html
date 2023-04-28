@@ -19,13 +19,13 @@
                 <div>
                     <strong>Last Active: </strong>
                     <p>
-                        {{friend.lastActive}}
+                        {{friend.lastActive | date}}
                     </p>
                 </div>
                 <div>
                     <strong>Member Since: </strong>
                     <p>
-                        {{friend.created}}
+                        {{friend.created | date: 'longDate'}}
                     </p>
                 </div>
             </div>
