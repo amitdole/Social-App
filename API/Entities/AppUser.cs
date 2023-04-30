@@ -1,4 +1,5 @@
 ﻿using API.Extensions;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace API.Entities
@@ -34,9 +35,13 @@ namespace API.Entities
 
         public List<Photo> Photos { get; set; } = new ();
 
-        //public int GetAge()
-        //{
-        //    return DateOfBirth.CalculateAge();
-        //}
+        public List<UserLike> LinkedByUsers { get; set; }
+
+        public List<UserLike> LinkedUsers { get; set; }
+
+        public int GetAge()
+        {
+            return DateOfBirth.CalculateAge();
+        }
     }
 }
