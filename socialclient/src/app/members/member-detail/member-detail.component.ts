@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
+import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 
 import { Friend } from 'src/app/_models/friend';
+import { Message } from 'src/app/_models/message';
 import { FriendsService } from 'src/app/_services/Friends.service';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -12,15 +15,28 @@ import { FriendsService } from 'src/app/_services/Friends.service';
 })
 export class MemberDetailComponent implements OnInit {
 
-  friend: Friend | undefined;
+  @ViewChild('memberTabs',{static: true}) membertabs?: TabsetComponent;
+  friend: Friend = {} as Friend;
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
+  activeTab?: TabDirective;
+  messages: Message[] = []
 
   constructor(private friendsService: FriendsService, 
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private messageService: MessageService) {}
 
   ngOnInit(): void {
-    this.loadFriend();
+    
+    this.route.data.subscribe({
+      next: data => this.friend = data['friend']
+    })
+
+    this.route.queryParams.subscribe({
+      next: params => {
+        params['tab'] && this.selectTab(params['tab'])
+      }
+    })
     this.galleryOptions = [
       {
         width: '500px',
@@ -31,6 +47,8 @@ export class MemberDetailComponent implements OnInit {
         preview: false
       }
     ]
+
+    this.galleryImages= this.getImages();
   }
 
   getImages(){
@@ -48,15 +66,28 @@ export class MemberDetailComponent implements OnInit {
 
     return imageUrls;
   }
-  loadFriend(){
-    const userName = this.route.snapshot.paramMap.get('userName');
+  
+  loadMessages(){
+    if (this.friend)
+    {
+      this.messageService.getMessageThread(this.friend.userName).subscribe({
+        next: messages => this.messages = messages
+      })
+    }
+  }
 
-    if (!userName) return;
-    this.friendsService.getFriend(userName).subscribe({
-      next: friend => {
-        this.friend = friend;
-        this.galleryImages= this.getImages();
-      }
-    });
+  onTabActivated(data: TabDirective){
+    this.activeTab = data;
+
+    if (this.activeTab.heading === 'Messages'){
+      this.loadMessages();
+    }
+  }
+
+  selectTab(heading: string){
+    console.log(heading);
+    if (this.membertabs){
+      this.membertabs.tabs.find(x => x.heading === heading)!.active = true;
+    }
   }
 }

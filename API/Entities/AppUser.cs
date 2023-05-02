@@ -39,7 +39,10 @@ namespace API.Entities
 
         public List<UserLike> LinkedUsers { get; set; }
 
-        public int GetAge()
+        public List<Message> MessagesSent { get; set; }
+        public List<Message> MessagesReceived { get; set; }
+
+    public int GetAge()
         {
             return DateOfBirth.CalculateAge();
         }
