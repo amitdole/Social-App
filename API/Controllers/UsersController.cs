@@ -23,6 +23,7 @@ namespace API.Controllers
         }
 
         //[AllowAnonymous]
+        //[Authorize(Roles ="Admin")]
         [HttpGet]
         public async Task<ActionResult<PagedList<FriendDto>>> GetUsers([FromQuery] UserParams userparams)
         {
@@ -43,6 +44,7 @@ namespace API.Controllers
             return Ok(friends);
         }
 
+        //[Authorize(Roles = "Member")]
         [HttpGet("{userName}")]
         public async Task<ActionResult<FriendDto>> GetUser(string userName)
         {

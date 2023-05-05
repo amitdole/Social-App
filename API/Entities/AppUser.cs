@@ -1,50 +1,41 @@
 ﻿using API.Extensions;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
-namespace API.Entities
+namespace API.Entities;
+
+public class AppUser: IdentityUser<int>
 {
-    public class AppUser
-    {
-        [Key]
-        public int Id { get; set; }
+    public DateOnly DateOfBirth { get; set; }
 
-        public string UserName { get; set; }
+    public string Alias { get; set; }
 
-        public byte[] PasswordHash { get; set; }
+    public DateTime Created { get; set; } = DateTime.UtcNow;
 
-        public byte[] PasswordSalt { get; set; }
+    public DateTime LastActive { get; set; } = DateTime.UtcNow;
 
-        public DateOnly DateOfBirth { get; set; }
+    public string Gender { get; set; }
 
-        public string Alias { get; set; }
+    public string Introduction { get; set; }
 
-        public DateTime Created { get; set; } = DateTime.UtcNow;
+    public string Hobbies { get; set; }
 
-        public DateTime LastActive { get; set; } = DateTime.UtcNow;
+    public string City { get; set; }
 
-        public string Gender { get; set; }
+    public string Country { get; set; }
 
-        public string Introduction { get; set; }
+    public List<Photo> Photos { get; set; } = new ();
 
-        public string Hobbies { get; set; }
+    public List<UserLike> LinkedByUsers { get; set; }
 
-        public string City { get; set; }
+    public List<UserLike> LinkedUsers { get; set; }
 
-        public string Country { get; set; }
+    public List<Message> MessagesSent { get; set; }
+    public List<Message> MessagesReceived { get; set; }
 
-        public List<Photo> Photos { get; set; } = new ();
-
-        public List<UserLike> LinkedByUsers { get; set; }
-
-        public List<UserLike> LinkedUsers { get; set; }
-
-        public List<Message> MessagesSent { get; set; }
-        public List<Message> MessagesReceived { get; set; }
+    public ICollection<AppUserRole> UserRoles { get; set; }
 
     public int GetAge()
-        {
-            return DateOfBirth.CalculateAge();
-        }
+    {
+        return DateOfBirth.CalculateAge();
     }
 }
