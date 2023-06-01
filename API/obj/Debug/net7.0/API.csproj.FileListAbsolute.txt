@@ -76,3 +76,4 @@ C:\Users\Amit\Documents\GitHub\Social App\API\obj\Debug\net7.0\API.genruntimecon
 C:\Users\Amit\Documents\GitHub\Social App\API\obj\Debug\net7.0\ref\API.dll
 C:\Users\Amit\Documents\GitHub\Social App\API\bin\Debug\net7.0\appsettings.Test.json
 C:\Users\Amit\Documents\GitHub\Social App\API\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Amit\Documents\GitHub\Social App\API\bin\Debug\net7.0\API.staticwebassets.runtime.json

@@ -17,24 +17,24 @@ namespace API.Extensions
                 option.UseSqlServer(config.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddCors(options => options.AddPolicy
-            ("social", builder => builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200")));
+            services.AddCors();
+
+
+            //services.AddCors(options => options.AddPolicy
+            //("social", builder => builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200")));
 
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
 
             services.AddScoped<LogUserActivity>();
-            services.AddScoped<ILikesRepository, LikesRepository>();
-
-            services.AddScoped<IMessageRepository, MessageRepository>();
 
             services.AddSignalR();
 
             services.AddSingleton<PresenceTracker>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

@@ -96,7 +96,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   onTabActivated(data: TabDirective){
     this.activeTab = data;
-
     if (this.activeTab.heading === 'Messages' && this.user){
       this.messageService.createHubConnection(this.user,this.friend.userName)
     }else{
@@ -105,7 +104,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   }
 
   selectTab(heading: string){
-    console.log(heading);
     if (this.membertabs){
       this.membertabs.tabs.find(x => x.heading === heading)!.active = true;
     }
