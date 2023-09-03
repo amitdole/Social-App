@@ -27,7 +27,6 @@ export class ConfirmDialogComponent implements OnInit {
   }
 
   decline() {
-    console.log('decline');
     this.bsModalref.hide()
   }
 
